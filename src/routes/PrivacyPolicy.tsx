@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 // プライバシーポリシー
 const PrivacyPolicy: VFC = () => (
-  <div>
+  <>
     <header>
       <Header1 />
     </header>
@@ -15,7 +15,7 @@ const PrivacyPolicy: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default PrivacyPolicy;

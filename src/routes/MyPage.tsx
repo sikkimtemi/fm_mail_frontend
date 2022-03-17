@@ -6,7 +6,7 @@ import Spacer from '../components/Spacer';
 
 // マイページ
 const Doc: VFC = () => (
-  <div>
+  <>
     <header>
       <Header2 />
     </header>
@@ -17,7 +17,7 @@ const Doc: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default Doc;

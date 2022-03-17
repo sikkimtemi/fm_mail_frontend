@@ -6,8 +6,9 @@ import Feature from './components/Feature';
 import Price from './components/Price';
 import Contact from './components/Contact';
 
+// ランディングページ
 const App: VFC = () => (
-  <div>
+  <>
     <header>
       <Header1 />
     </header>
@@ -20,7 +21,7 @@ const App: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default App;

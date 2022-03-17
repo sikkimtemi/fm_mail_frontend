@@ -6,7 +6,7 @@ import Spacer from '../components/Spacer';
 
 // ログイン画面
 const LoginPage: VFC = () => (
-  <div>
+  <>
     <header>
       <Header1 />
     </header>
@@ -18,7 +18,7 @@ const LoginPage: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default LoginPage;

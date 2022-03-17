@@ -6,7 +6,7 @@ import Spacer from '../components/Spacer';
 
 // 新規ユーザー登録画面
 const Signup: VFC = () => (
-  <div>
+  <>
     <header>
       <Header1 />
     </header>
@@ -18,7 +18,7 @@ const Signup: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default Signup;

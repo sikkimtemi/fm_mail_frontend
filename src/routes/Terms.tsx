@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 // 利用規約
 const Terms: VFC = () => (
-  <div>
+  <>
     <header>
       <Header1 />
     </header>
@@ -15,7 +15,7 @@ const Terms: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default Terms;

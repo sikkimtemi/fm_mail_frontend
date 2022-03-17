@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 // 特定商取引法に基づく表記
 const Tokusyouhou: VFC = () => (
-  <div>
+  <>
     <header>
       <Header1 />
     </header>
@@ -15,7 +15,7 @@ const Tokusyouhou: VFC = () => (
     <footer>
       <Footer />
     </footer>
-  </div>
+  </>
 );
 
 export default Tokusyouhou;
