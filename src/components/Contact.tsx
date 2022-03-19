@@ -1,6 +1,7 @@
+import { VFC } from 'react';
 import { HashLink } from 'react-router-hash-link';
 
-const Contact = () => (
+const Contact: VFC = () => (
   <section id="Contact" className="bg-gray-100 py-6 sm:py-8 lg:py-12">
     <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
       <div className="mb-10 md:mb-16">

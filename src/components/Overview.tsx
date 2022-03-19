@@ -1,7 +1,8 @@
+import { VFC } from 'react';
 import newsletter from '../svg/undraw_newsletter_re_wrob.svg';
 import mailReceive from '../img/mail_receive.png';
 
-const Overview = () => (
+const Overview: VFC = () => (
   <>
     <section id="Overview" className="body-font bg-gray-100 text-gray-600">
       <div className="container mx-auto flex flex-col items-center px-5 py-24 md:flex-row">

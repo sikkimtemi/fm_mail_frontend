@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { VFC, useState } from 'react';
 import Logo from '../svg/FM_Mail_logo.svg';
 
-const Header2 = () => {
+const Header2: VFC = () => {
   const [noticeDropdown, setNoticeDropdown] = useState(false);
   const [userDropdown, setUserDropdown] = useState(false);
   const toggleNoticeDropdown = () => {

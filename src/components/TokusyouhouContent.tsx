@@ -1,3 +1,4 @@
+import { VFC } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 const body = `
@@ -42,7 +43,7 @@ const body = `
 ○○ ○○
 `;
 
-const TokusyouhouContent = () => (
+const TokusyouhouContent: VFC = () => (
   <section className="bg-white py-6 sm:py-8 lg:py-12">
     <div className="prose mx-auto max-w-screen-md justify-center px-4 md:px-8">
       <ReactMarkdown>{body}</ReactMarkdown>

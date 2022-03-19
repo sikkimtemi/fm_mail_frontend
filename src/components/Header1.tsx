@@ -1,8 +1,9 @@
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Logo from '../svg/FM_Mail_logo.svg';
 
-const Header1 = () => (
+const Header1: VFC = () => (
   <nav className="bg-white shadow dark:bg-gray-800">
     <div className="container mx-auto px-6 py-4">
       <div className="md:flex md:items-center md:justify-between">

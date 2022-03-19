@@ -1,6 +1,7 @@
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 
-const LoginForm = () => (
+const LoginForm: VFC = () => (
   <section className="m-auto w-full max-w-sm rounded-md bg-white p-6 shadow-md dark:bg-gray-800">
     <h1 className="text-center text-3xl font-semibold text-gray-700 dark:text-white">
       FM Mail ログイン
