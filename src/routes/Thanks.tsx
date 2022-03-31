@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Spacer from '../components/Spacer';
 
 // ユーザー登録後の確認画面
-const Doc: VFC = () => (
+const Thanks: VFC = () => (
   <>
     <header>
       <Header2 />
@@ -20,4 +20,4 @@ const Doc: VFC = () => (
   </>
 );
 
-export default Doc;
+export default Thanks;

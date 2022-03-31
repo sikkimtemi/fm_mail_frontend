@@ -3,15 +3,22 @@ import { VFC, useState } from 'react';
 import Logo from '../svg/FM_Mail_logo.svg';
 
 const Header2: VFC = () => {
-  const [noticeDropdown, setNoticeDropdown] = useState(false);
-  const [userDropdown, setUserDropdown] = useState(false);
-  const toggleNoticeDropdown = () => {
-    setNoticeDropdown((t) => !t);
-    setUserDropdown(false);
+  // 通知プルダウンの制御用
+  const [isNoticeOpen, setIsNoticeOpen] = useState(false);
+
+  // ユーザー情報プルダウンの制御用
+  const [isUserOpen, setIsUserOpen] = useState(false);
+
+  // 通知アイコンクリック時の処理
+  const handleNoticeClick = () => {
+    setIsNoticeOpen((t) => !t);
+    setIsUserOpen(false);
   };
-  const toggleUserDropdown = () => {
-    setNoticeDropdown(false);
-    setUserDropdown((t) => !t);
+
+  // ユーザーアイコンクリック時の処理
+  const handleUserClick = () => {
+    setIsNoticeOpen(false);
+    setIsUserOpen((t) => !t);
   };
 
   return (
@@ -70,11 +77,11 @@ const Header2: VFC = () => {
             <div className="relative mt-4 flex md:mt-0">
               <div className="relative inline-block">
                 <button
-                  id="noticeDropdownButton"
+                  id="isNoticeOpenButton"
                   type="button"
                   className="mx-4 hidden h-full transform text-gray-600 transition-colors duration-200 hover:text-gray-700 focus:text-gray-700 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400 md:block"
                   aria-label="show notifications"
-                  onClick={toggleNoticeDropdown}
+                  onClick={handleNoticeClick}
                 >
                   <svg
                     className="h-6 w-6"
@@ -93,14 +100,14 @@ const Header2: VFC = () => {
                 </button>
                 <div
                   className={
-                    noticeDropdown
+                    isNoticeOpen
                       ? 'absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
                       : 'absolute right-0 mt-2 hidden w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
                   }
                 >
                   <ul
                     className="divide-y divide-gray-100 py-1"
-                    aria-labelledby="noticeDropdownButton"
+                    aria-labelledby="isNoticeOpenButton"
                   >
                     <li>
                       <p className="mx-2 text-sm text-gray-600 dark:text-white">
@@ -118,11 +125,11 @@ const Header2: VFC = () => {
               </div>
               <div className="relative inline-block">
                 <button
-                  id="userDropdownButton"
+                  id="isUserOpenButton"
                   type="button"
                   className="flex items-center focus:outline-none"
                   aria-label="toggle profile dropdown"
-                  onClick={toggleUserDropdown}
+                  onClick={handleUserClick}
                 >
                   <div className="h-8 w-8 overflow-hidden rounded-full border-2 border-gray-400">
                     <img
@@ -137,7 +144,7 @@ const Header2: VFC = () => {
                 </button>
                 <div
                   className={
-                    userDropdown
+                    isUserOpen
                       ? 'absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
                       : 'absolute right-0 mt-2 hidden w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
                   }

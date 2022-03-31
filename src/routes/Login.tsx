@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import Spacer from '../components/Spacer';
 
 // ログイン画面
-const LoginPage: VFC = () => (
+const Login: VFC = () => (
   <>
     <header>
       <Header1 />
@@ -21,4 +21,4 @@ const LoginPage: VFC = () => (
   </>
 );
 
-export default LoginPage;
+export default Login;

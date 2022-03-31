@@ -5,14 +5,14 @@ import Footer from '../components/Footer';
 import Spacer from '../components/Spacer';
 
 // マイページ
-const Doc: VFC = () => (
+const MyPage: VFC = () => (
   <>
     <header>
       <Header2 />
     </header>
     <main>
       <Notice />
-      <Spacer size={250} />
+      <Spacer size={50} />
     </main>
     <footer>
       <Footer />
@@ -20,4 +20,4 @@ const Doc: VFC = () => (
   </>
 );
 
-export default Doc;
+export default MyPage;
