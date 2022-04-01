@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Amplify from 'aws-amplify';
+import awsExports from './awsExports';
 import App from './App';
 import Doc from './routes/Doc';
 import Login from './routes/Login';
@@ -13,7 +15,11 @@ import Thanks from './routes/Thanks';
 import Terms from './routes/Terms';
 import Tokusyouhou from './routes/Tokusyouhou';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+Amplify.configure(awsExports);
+
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
+const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
