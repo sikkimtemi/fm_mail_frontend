@@ -1,24 +1,15 @@
 import { VFC } from 'react';
-import Header1 from '../components/Header1';
 import SignupForm from '../components/SignupForm';
-import Footer from '../components/Footer';
 import Spacer from '../components/Spacer';
+import PublicLayout from '../components/layouts/PublicLayout';
 
 // 新規ユーザー登録画面
 const Signup: VFC = () => (
-  <>
-    <header>
-      <Header1 />
-    </header>
-    <main>
-      <Spacer size={250} />
-      <SignupForm />
-      <Spacer size={250} />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <PublicLayout>
+    <Spacer size={250} />
+    <SignupForm />
+    <Spacer size={250} />
+  </PublicLayout>
 );
 
 export default Signup;

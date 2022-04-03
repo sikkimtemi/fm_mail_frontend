@@ -1,21 +1,12 @@
 import { VFC } from 'react';
-import Header1 from '../components/Header1';
 import TokusyouhouContent from '../components/TokusyouhouContent';
-import Footer from '../components/Footer';
+import PublicLayout from '../components/layouts/PublicLayout';
 
 // 特定商取引法に基づく表記
 const Tokusyouhou: VFC = () => (
-  <>
-    <header>
-      <Header1 />
-    </header>
-    <main>
-      <TokusyouhouContent />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <PublicLayout>
+    <TokusyouhouContent />
+  </PublicLayout>
 );
 
 export default Tokusyouhou;

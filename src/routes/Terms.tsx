@@ -1,21 +1,12 @@
 import { VFC } from 'react';
-import Header1 from '../components/Header1';
 import TermsContent from '../components/TermsContent';
-import Footer from '../components/Footer';
+import PublicLayout from '../components/layouts/PublicLayout';
 
 // 利用規約
 const Terms: VFC = () => (
-  <>
-    <header>
-      <Header1 />
-    </header>
-    <main>
-      <TermsContent />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <PublicLayout>
+    <TermsContent />
+  </PublicLayout>
 );
 
 export default Terms;

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState, VFC } from 'react';
-import { Auth, Hub } from 'aws-amplify';
-import type { HubCapsule } from '@aws-amplify/core';
+import { useState, VFC } from 'react';
+import { Auth } from 'aws-amplify';
 import Logo from '../svg/FM_Mail_logo.svg';
 
 const Header2: VFC = () => {
@@ -22,57 +21,6 @@ const Header2: VFC = () => {
     setIsNoticeOpen(false);
     setIsUserOpen((t) => !t);
   };
-
-  // サインイン中のユーザー情報
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const [user, setUser] = useState<any | null>(null);
-
-  // Cognitoからサインイン中のユーザー情報を取得する
-  const getUser = async () => {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const userData = await Auth.currentAuthenticatedUser();
-      // デバッグ用
-      void Auth.currentSession().then((data) => {
-        console.log(`token: ${data.getIdToken().getJwtToken()}`);
-      });
-      console.log(userData);
-
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return userData;
-    } catch (e) {
-      return console.log('Not signed in');
-    }
-  };
-
-  const listener = (authData: HubCapsule) => {
-    const {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      payload: { event, data },
-    } = authData;
-    switch (event) {
-      case 'signIn':
-      case 'cognitoHostedUI': {
-        const currentUser = getUser();
-        setUser(currentUser);
-        break;
-      }
-      case 'signOut':
-        setUser(null);
-        break;
-      case 'signIn_failure':
-      case 'cognitoHostedUI_failure':
-      default:
-        console.log('Sign in failure', data);
-        break;
-    }
-  };
-
-  useEffect(() => {
-    Hub.listen('auth', listener);
-    void getUser().then((userData) => setUser(userData));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <nav className="bg-white shadow dark:bg-gray-800">
@@ -209,10 +157,6 @@ const Header2: VFC = () => {
                         className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         ユーザー設定
-                        {
-                          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                          user ? user.username : null
-                        }
                       </Link>
                     </li>
                     <li>

@@ -1,21 +1,12 @@
 import { VFC } from 'react';
-import Header1 from '../components/Header1';
 import PrivacyPolicyContent from '../components/PrivacyPolicyContent';
-import Footer from '../components/Footer';
+import PublicLayout from '../components/layouts/PublicLayout';
 
 // プライバシーポリシー
 const PrivacyPolicy: VFC = () => (
-  <>
-    <header>
-      <Header1 />
-    </header>
-    <main>
-      <PrivacyPolicyContent />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <PublicLayout>
+    <PrivacyPolicyContent />
+  </PublicLayout>
 );
 
 export default PrivacyPolicy;

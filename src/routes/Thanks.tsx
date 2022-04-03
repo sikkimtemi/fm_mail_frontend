@@ -1,23 +1,14 @@
 import { VFC } from 'react';
-import Header2 from '../components/Header2';
 import ThanksContent from '../components/ThanksContent';
-import Footer from '../components/Footer';
 import Spacer from '../components/Spacer';
+import PublicLayout from '../components/layouts/PublicLayout';
 
 // ユーザー登録後の確認画面
 const Thanks: VFC = () => (
-  <>
-    <header>
-      <Header2 />
-    </header>
-    <main>
-      <ThanksContent />
-      <Spacer size={250} />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <PublicLayout>
+    <ThanksContent />
+    <Spacer size={250} />
+  </PublicLayout>
 );
 
 export default Thanks;

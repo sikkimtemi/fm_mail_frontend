@@ -1,23 +1,12 @@
 import { VFC } from 'react';
-import Header1 from '../components/Header1';
 import DocContent from '../components/DocContent';
-import Footer from '../components/Footer';
-import Spacer from '../components/Spacer';
+import PublicLayout from '../components/layouts/PublicLayout';
 
 // 使い方ガイド
 const Doc: VFC = () => (
-  <>
-    <header>
-      <Header1 />
-    </header>
-    <main>
-      <DocContent />
-      <Spacer size={250} />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <PublicLayout>
+    <DocContent />
+  </PublicLayout>
 );
 
 export default Doc;

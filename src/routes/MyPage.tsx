@@ -1,23 +1,14 @@
 import { VFC } from 'react';
-import Header2 from '../components/Header2';
 import Notice from '../components/Notice';
-import Footer from '../components/Footer';
 import Spacer from '../components/Spacer';
+import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
 
 // マイページ
 const MyPage: VFC = () => (
-  <>
-    <header>
-      <Header2 />
-    </header>
-    <main>
-      <Notice />
-      <Spacer size={50} />
-    </main>
-    <footer>
-      <Footer />
-    </footer>
-  </>
+  <AuthenticatedLayout>
+    <Notice />
+    <Spacer size={50} />
+  </AuthenticatedLayout>
 );
 
 export default MyPage;
