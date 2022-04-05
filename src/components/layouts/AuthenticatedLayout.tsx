@@ -1,62 +1,56 @@
 import React, { VFC, useEffect, useState } from 'react';
 import { Auth, Hub } from 'aws-amplify';
-import type { HubCapsule } from '@aws-amplify/core';
+import type { HubCapsule, HubPayload } from '@aws-amplify/core';
 import Header2 from '../Header2';
 import Footer from '../Footer';
 
 export type Props = { children: React.ReactNode };
+type User = { username: string };
 
 const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // サインイン中のユーザー情報
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Cognitoからサインイン中のユーザー情報を取得する
-  const getUser = async () => {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const userData = await Auth.currentAuthenticatedUser();
-      // デバッグ用
-      void Auth.currentSession().then((data) => {
-        console.log(`token: ${data.getIdToken().getJwtToken()}`);
-      });
-      console.log(userData);
-
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return userData;
-    } catch (e) {
-      return console.log('Not signed in');
-    }
-  };
-
-  const listener = (authData: HubCapsule) => {
-    const {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      payload: { event, data },
-    } = authData;
+  const onAuthEvent = async (payload: HubPayload) => {
+    const { event } = payload;
     switch (event) {
       case 'signIn':
       case 'cognitoHostedUI': {
-        const currentUser = getUser();
-        setUser(currentUser);
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          const userData: User = await Auth.currentAuthenticatedUser();
+          setUser(userData);
+          setIsLoading(false);
+        } catch (e) {
+          console.log('Not signed in');
+        }
         break;
       }
       case 'signOut':
         setUser(null);
+        setIsLoading(false);
         break;
       case 'signIn_failure':
       case 'cognitoHostedUI_failure':
       default:
-        console.log('Sign in failure', data);
+        setIsLoading(false);
+        console.log('Sign in failure', payload.data);
         break;
     }
   };
 
   useEffect(() => {
-    Hub.listen('auth', listener);
-    void getUser().then((userData) => setUser(userData));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setIsLoading(true);
+    Hub.listen('auth', (hubData: HubCapsule) => {
+      const { payload } = hubData;
+      void onAuthEvent(payload);
+    });
   }, []);
+
+  if (isLoading) {
+    return <main>Loading...</main>;
+  }
 
   return (
     <>
@@ -64,9 +58,9 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
         <Header2 />
         {
           // 暫定確認用：サインイン中のユーザー名
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           user ? user.username : null
         }
+        {isLoading}
       </header>
       <main>{children}</main>
       <footer>
