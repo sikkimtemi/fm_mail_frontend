@@ -1,52 +1,48 @@
 import React, { VFC, useEffect, useState } from 'react';
-import { Auth, Hub } from 'aws-amplify';
-import type { HubCapsule, HubPayload } from '@aws-amplify/core';
+import { Auth } from 'aws-amplify';
 import Header2 from '../Header2';
 import Footer from '../Footer';
 
 export type Props = { children: React.ReactNode };
-type User = { username: string };
+type Payload = { email: string };
+type IdToken = { payload: Payload };
+type SignInUserSession = { idToken: IdToken };
+type User = { signInUserSession: SignInUserSession };
 
 const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // サインイン中のユーザー情報
   const [user, setUser] = useState<User | null>(null);
+
+  // 読込中フラグ
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const onAuthEvent = async (payload: HubPayload) => {
-    const { event } = payload;
-    switch (event) {
-      case 'signIn':
-      case 'cognitoHostedUI': {
-        try {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const userData: User = await Auth.currentAuthenticatedUser();
-          setUser(userData);
-          setIsLoading(false);
-        } catch (e) {
-          console.log('Not signed in');
-        }
-        break;
-      }
-      case 'signOut':
-        setUser(null);
-        setIsLoading(false);
-        break;
-      case 'signIn_failure':
-      case 'cognitoHostedUI_failure':
-      default:
-        setIsLoading(false);
-        console.log('Sign in failure', payload.data);
-        break;
-    }
-  };
-
+  // サインイン済みかどうかチェックする
   useEffect(() => {
-    setIsLoading(true);
-    Hub.listen('auth', (hubData: HubCapsule) => {
-      const { payload } = hubData;
-      void onAuthEvent(payload);
-    });
+    // awaitを扱うため、いったん非同期関数を作ってから呼び出している
+    const checkSignIn = async () => {
+      console.log('check signed in start');
+      try {
+        // サインイン済みのユーザー情報を取得する
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const currentUser: User = await Auth.currentAuthenticatedUser();
+        // ユーザー情報を取得できたState Hookにセット（これをトリガーにもう一つのEffect Hookが動く）
+        setUser(currentUser);
+        console.log('Sign in success', currentUser);
+      } catch (e) {
+        // サインインしていない場合はログイン画面に遷移させる
+        console.log('Not signed in', e);
+        await Auth.federatedSignIn();
+      }
+    };
+
+    // Promiseを無視して呼び出すことを明示するためvoidを付けている
+    void checkSignIn();
   }, []);
+
+  // ユーザー情報を取得できたらローディング表示をやめる
+  useEffect(() => {
+    if (user) setIsLoading(false);
+  }, [user]);
 
   if (isLoading) {
     return <main>Loading...</main>;
@@ -58,7 +54,7 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
         <Header2 />
         {
           // 暫定確認用：サインイン中のユーザー名
-          user ? user.username : null
+          user ? user.signInUserSession.idToken.payload.email : null
         }
         {isLoading}
       </header>
