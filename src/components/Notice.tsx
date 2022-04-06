@@ -12,9 +12,9 @@ const randomImage = [Image1, Image2, Image3, Image4][
 
 const Notice: VFC = () => (
   <section className="bg-white py-6 sm:py-8 lg:py-12">
-    <div className="prose mx-auto max-w-screen-md px-4 md:px-8">
-      <h1>お知らせ</h1>
-      <p>ご利用中のプランはFREEプランです。</p>
+    <div className="mx-auto max-w-screen-md px-4 md:px-8">
+      <h1 className="mb-8 text-4xl font-bold">お知らせ</h1>
+      <p className="mb-4">ご利用中のプランはFREEプランです。</p>
       <div className="w-5/6 md:w-1/2 lg:w-full lg:max-w-lg">
         <img
           className="rounded object-cover object-center"

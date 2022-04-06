@@ -7,7 +7,10 @@ export type Props = { children: React.ReactNode };
 type Payload = { email: string };
 type IdToken = { payload: Payload };
 type SignInUserSession = { idToken: IdToken };
-type User = { signInUserSession: SignInUserSession };
+type User = {
+  signInUserSession: SignInUserSession;
+  username: string;
+};
 
 const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // サインイン中のユーザー情報

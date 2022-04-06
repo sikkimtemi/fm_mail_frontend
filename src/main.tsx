@@ -14,6 +14,7 @@ import Signup from './routes/Signup';
 import Thanks from './routes/Thanks';
 import Terms from './routes/Terms';
 import Tokusyouhou from './routes/Tokusyouhou';
+import ShowAPIKey from './routes/ShowAPIKey';
 
 Amplify.configure(awsExports);
 
@@ -25,6 +26,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="api_key" element={<ShowAPIKey />} />
         <Route path="doc" element={<Doc />} />
         <Route path="login" element={<Login />} />
         <Route path="mypage" element={<MyPage />} />
