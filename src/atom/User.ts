@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
 type Payload = { email: string };
 type IdToken = { payload: Payload };
@@ -8,14 +8,6 @@ export type CognitoUser = {
   username: string;
 };
 
-export type User = {
-  email: string;
-  username: string;
-};
-
-const stateCurrentUser = atom<User | null>({
-  key: 'current-user',
-  default: null,
-});
+const stateCurrentUser = atom<CognitoUser | null>(null);
 
 export default stateCurrentUser;

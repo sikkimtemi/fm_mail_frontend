@@ -1,18 +1,17 @@
 import React, { VFC, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import Header2 from '../Header2';
 import Footer from '../Footer';
 import Spinner from '../Spinner';
-import type { CognitoUser, User } from '../../atom/User';
+import type { CognitoUser } from '../../atom/User';
 import stateCurrentUser from '../../atom/User';
 
 export type Props = { children: React.ReactNode };
 
 const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // サインイン中のユーザー情報
-  // const [user, setUser] = useState<User | null>(null);
-  const [user, setUser] = useRecoilState(stateCurrentUser);
+  const [user, setUser] = useAtom(stateCurrentUser);
 
   // 読込中フラグ
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -27,17 +26,12 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
         console.log('Sign in success', currentUser);
-        const myUser: User = {
-          username: currentUser.username,
-          email: currentUser.signInUserSession.idToken.payload.email,
-        };
         // ユーザー情報を取得できたState Hookにセット（これをトリガーにもう一つのEffect Hookが動く）
-        setUser(myUser);
-        // setUser(null);
+        setUser(currentUser);
       } catch (e) {
         // サインインしていない場合はログイン画面に遷移させる
         console.log('Not signed in', e);
-        // await Auth.federatedSignIn();
+        await Auth.federatedSignIn();
       }
     };
 
@@ -64,7 +58,7 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
         <Header2 />
         {
           // 暫定確認用：サインイン中のユーザー名
-          user ? user.email : null
+          user ? user.signInUserSession.idToken.payload.email : null
         }
         {isLoading}
       </header>

@@ -1,10 +1,10 @@
 import { VFC } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useAtom } from 'jotai';
 import Image1 from '../svg/undraw_content_team_3epn.svg';
 import Image2 from '../svg/undraw_real_time_analytics_re_yliv.svg';
 import Image3 from '../svg/undraw_react_y-7-wq.svg';
 import Image4 from '../svg/undraw_remotely_-2-j6y.svg';
-import type { User } from '../atom/User';
+import type { CognitoUser } from '../atom/User';
 import stateCurrentUser from '../atom/User';
 
 // 表示するコンテンツが少ないので画像を表示
@@ -14,14 +14,15 @@ const randomImage = [Image1, Image2, Image3, Image4][
 ];
 
 const APIKey: VFC = () => {
-  const user = useRecoilValue<User | null>(stateCurrentUser);
+  const [user] = useAtom<CognitoUser | null>(stateCurrentUser);
 
   return (
     <section className="bg-white py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-md px-4 md:px-8">
         <h1 className="mb-8 text-4xl font-bold">APIキーの確認</h1>
         <p className="mb-4">
-          {user ? user.email : null}ご利用可能なAPIキーはこちらです。
+          {user ? user.signInUserSession.idToken.payload.email : null}
+          ご利用可能なAPIキーはこちらです。
         </p>
         <table className="mb-8 rounded-lg bg-white p-4 shadow">
           <thead>

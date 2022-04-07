@@ -15,12 +15,12 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.2",
     "aws-amplify": "^4.3.18",
+    "jotai": "^1.6.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-markdown": "^8.0.0",
     "react-router-dom": "^6.2.2",
     "react-router-hash-link": "^2.4.3",
-    "recoil": "^0.7.0",
     "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
