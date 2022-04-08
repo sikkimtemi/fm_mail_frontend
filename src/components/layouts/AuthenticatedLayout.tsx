@@ -1,20 +1,22 @@
 import React, { VFC, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
+import { useAtom } from 'jotai';
 import Header2 from '../Header2';
 import Footer from '../Footer';
+import Spinner from '../Spinner';
+import type { CognitoUser } from '../../atom/User';
+import stateCurrentUser from '../../atom/User';
 
 export type Props = { children: React.ReactNode };
-type Payload = { email: string };
-type IdToken = { payload: Payload };
-type SignInUserSession = { idToken: IdToken };
-type User = {
-  signInUserSession: SignInUserSession;
-  username: string;
-};
+type UserValue = CognitoUser | null;
+type UserUpdate = CognitoUser | null;
+type UserResult = void;
 
 const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // サインイン中のユーザー情報
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useAtom<UserValue, UserUpdate, UserResult>(
+    stateCurrentUser,
+  );
 
   // 読込中フラグ
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -27,10 +29,10 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
       try {
         // サインイン済みのユーザー情報を取得する
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const currentUser: User = await Auth.currentAuthenticatedUser();
+        const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
+        console.log('Sign in success', currentUser);
         // ユーザー情報を取得できたState Hookにセット（これをトリガーにもう一つのEffect Hookが動く）
         setUser(currentUser);
-        console.log('Sign in success', currentUser);
       } catch (e) {
         // サインインしていない場合はログイン画面に遷移させる
         console.log('Not signed in', e);
@@ -40,7 +42,7 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
 
     // Promiseを無視して呼び出すことを明示するためvoidを付けている
     void checkSignIn();
-  }, []);
+  }, [setUser]);
 
   // ユーザー情報を取得できたらローディング表示をやめる
   useEffect(() => {
@@ -48,7 +50,11 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   }, [user]);
 
   if (isLoading) {
-    return <main>Loading...</main>;
+    return (
+      <main>
+        <Spinner />
+      </main>
+    );
   }
 
   return (
