@@ -8,10 +8,15 @@ import type { CognitoUser } from '../../atom/User';
 import stateCurrentUser from '../../atom/User';
 
 export type Props = { children: React.ReactNode };
+type UserValue = CognitoUser | null;
+type UserUpdate = CognitoUser | null;
+type UserResult = void;
 
 const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // サインイン中のユーザー情報
-  const [user, setUser] = useAtom(stateCurrentUser);
+  const [user, setUser] = useAtom<UserValue, UserUpdate, UserResult>(
+    stateCurrentUser,
+  );
 
   // 読込中フラグ
   const [isLoading, setIsLoading] = useState<boolean>(true);
