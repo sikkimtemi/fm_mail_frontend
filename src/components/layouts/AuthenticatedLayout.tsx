@@ -4,8 +4,8 @@ import { useAtom } from 'jotai';
 import Header2 from '../Header2';
 import Footer from '../Footer';
 import Spinner from '../Spinner';
-import type { CognitoUser } from '../../atom/User';
 import stateCurrentUser from '../../atom/User';
+import type { CognitoUser } from '../../atom/User';
 
 export type Props = { children: React.ReactNode };
 type UserValue = CognitoUser | null;
@@ -30,9 +30,9 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
         // サインイン済みのユーザー情報を取得する
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
-        console.log('Sign in success', currentUser);
-        // ユーザー情報を取得できたState Hookにセット（これをトリガーにもう一つのEffect Hookが動く）
+        // ユーザー情報をJotaiで管理（これをトリガーにもう一つのEffect Hookが動く）
         setUser(currentUser);
+        console.log('Sign in success', currentUser);
       } catch (e) {
         // サインインしていない場合はログイン画面に遷移させる
         console.log('Not signed in', e);
@@ -47,8 +47,10 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // ユーザー情報を取得できたらローディング表示をやめる
   useEffect(() => {
     if (user) setIsLoading(false);
+    console.log('User info.', user);
   }, [user]);
 
+  // ローディング表示
   if (isLoading) {
     return (
       <main>
@@ -61,11 +63,6 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
     <>
       <header>
         <Header2 />
-        {
-          // 暫定確認用：サインイン中のユーザー名
-          user ? user.signInUserSession.idToken.payload.email : null
-        }
-        {isLoading}
       </header>
       <main>{children}</main>
       <footer>
