@@ -1,7 +1,6 @@
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import { Auth } from 'aws-amplify';
 import Logo from '../svg/FM_Mail_logo.svg';
 
 const Header1: VFC = () => (
@@ -66,25 +65,20 @@ const Header1: VFC = () => (
               お問い合わせ
             </HashLink>
           </div>
-
           <div className="mt-4 flex items-center md:mt-0">
             <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center lg:flex lg:justify-start">
               <button
                 type="button"
                 className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600 md:text-base"
-                // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                onClick={() => Auth.federatedSignIn()}
               >
-                ログイン
+                <Link to="/login">ログイン</Link>
               </button>
-
               <button
                 type="button"
                 className="inline-block rounded-lg bg-blue-500 px-8 py-3 text-center text-sm  text-white outline-none hover:bg-blue-600 active:bg-blue-700 md:text-base"
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                onClick={() => Auth.federatedSignIn()}
               >
-                新規登録
+                <Link to="/signup">新規登録</Link>
               </button>
             </div>
           </div>
