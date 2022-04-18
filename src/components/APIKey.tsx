@@ -76,7 +76,7 @@ const APIKey: VFC = () => {
         <div className="mx-auto max-w-screen-md px-4 md:px-8">
           <h1 className="mb-8 text-4xl font-bold">APIキーの確認</h1>
           <p className="mb-4">ご利用可能なAPIキーはこちらです。</p>
-          <Spinner />;
+          <Spinner />
         </div>
       </section>
     );

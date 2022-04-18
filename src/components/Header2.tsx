@@ -100,11 +100,9 @@ const Header2: VFC = () => {
                   </svg>
                 </button>
                 <div
-                  className={
-                    isNoticeOpen
-                      ? 'absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
-                      : 'absolute right-0 mt-2 hidden w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
-                  }
+                  className={`absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
+                    isNoticeOpen ? '' : 'hidden'
+                  }`}
                 >
                   <ul
                     className="divide-y divide-gray-100 py-1"
@@ -144,11 +142,9 @@ const Header2: VFC = () => {
                   </h3>
                 </button>
                 <div
-                  className={
-                    isUserOpen
-                      ? 'absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
-                      : 'absolute right-0 mt-2 hidden w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800'
-                  }
+                  className={`absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
+                    isUserOpen ? '' : 'hidden'
+                  }`}
                 >
                   <ul className="py-1" aria-labelledby="dropdownButton">
                     <li>
