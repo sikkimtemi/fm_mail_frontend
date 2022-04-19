@@ -1,6 +1,7 @@
 import React, { VFC, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
+import { Navigate } from 'react-router-dom';
 import Header2 from '../Header2';
 import Footer from '../Footer';
 import Spinner from '../Spinner';
@@ -21,22 +22,22 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
   // 読込中フラグ
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // 要ログインフラグ
+  const [loginRequired, setLoginRequired] = useState<boolean>(false);
+
   // サインイン済みかどうかチェックする
   useEffect(() => {
     // awaitを扱うため、いったん非同期関数を作ってから呼び出している
     const checkSignIn = async () => {
-      console.log('check signed in start');
       try {
         // サインイン済みのユーザー情報を取得する
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const currentUser: CognitoUser = await Auth.currentAuthenticatedUser();
         // ユーザー情報をJotaiで管理（これをトリガーにもう一つのEffect Hookが動く）
         setUser(currentUser);
-        console.log('Sign in success', currentUser);
       } catch (e) {
         // サインインしていない場合はログイン画面に遷移させる
-        console.log('Not signed in', e);
-        await Auth.federatedSignIn();
+        setLoginRequired(true);
       }
     };
 
@@ -44,11 +45,10 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
     void checkSignIn();
   }, [setUser]);
 
-  // ユーザー情報を取得できたらローディング表示をやめる
+  // サインイン済みチェックが終わったらローディング表示をやめる
   useEffect(() => {
-    if (user) setIsLoading(false);
-    console.log('User info.', user);
-  }, [user]);
+    if (user || loginRequired) setIsLoading(false);
+  }, [user, loginRequired]);
 
   // ローディング表示
   if (isLoading) {
@@ -57,6 +57,11 @@ const AuthenticatedLayout: VFC<Props> = ({ children }) => {
         <Spinner />
       </main>
     );
+  }
+
+  // 要ログインの場合はログイン画面に遷移
+  if (loginRequired) {
+    return <Navigate to="/login" replace />;
   }
 
   return (
