@@ -37,7 +37,6 @@ const APIKey: VFC = () => {
   useEffect(() => {
     // awaitを扱うため、いったん非同期関数を作ってから呼び出している
     const getApiKeys = async () => {
-      console.log('get api key start.');
       try {
         if (user) {
           // Lambda経由でDynamoDBにアクセスする
@@ -51,12 +50,11 @@ const APIKey: VFC = () => {
               },
             )
             .json();
-          console.log('Your API Key: ', res);
           if (res.result.Items) setApiKeys(res.result.Items);
         }
       } catch (e) {
-        // サインインしていない場合はログイン画面に遷移させる
-        console.log('get api key failed.', e);
+        // APIキー取得に失敗したらnullをセット
+        setApiKeys(null);
       }
     };
 
@@ -77,6 +75,13 @@ const APIKey: VFC = () => {
           <h1 className="mb-8 text-4xl font-bold">APIキーの確認</h1>
           <p className="mb-4">ご利用可能なAPIキーはこちらです。</p>
           <Spinner />
+          <div className="w-5/6 md:w-1/2 lg:w-full lg:max-w-lg">
+            <img
+              className="rounded object-cover object-center"
+              src={randomImage}
+              alt="APIキーの確認"
+            />
+          </div>
         </div>
       </section>
     );
@@ -100,7 +105,7 @@ const APIKey: VFC = () => {
                 APIキー
               </th>
               <th className="dark:border-dark-5 whitespace-nowrap border-b-2 p-4 font-normal text-gray-900">
-                アクション
+                コピー
               </th>
             </tr>
           </thead>
