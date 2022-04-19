@@ -1,4 +1,5 @@
 import { VFC } from 'react';
+import { Link } from 'react-router-dom';
 
 const Price: VFC = () => (
   <section id="Price" className="body-font overflow-hidden text-gray-600">
@@ -138,7 +139,7 @@ const Price: VFC = () => (
           type="button"
           className="inline-flex rounded border-0 bg-blue-500 py-3 px-6 text-lg text-white hover:bg-blue-600 focus:outline-none active:bg-blue-700"
         >
-          無料ではじめる
+          <Link to="/signup">無料ではじめる</Link>
         </button>
       </div>
     </div>

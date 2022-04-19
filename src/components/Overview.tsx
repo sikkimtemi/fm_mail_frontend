@@ -1,4 +1,5 @@
 import { VFC } from 'react';
+import { Link } from 'react-router-dom';
 import newsletter from '../svg/undraw_newsletter_re_wrob.svg';
 import mailReceive from '../img/mail_receive.png';
 
@@ -20,7 +21,7 @@ const Overview: VFC = () => (
               type="button"
               className="inline-flex rounded border-0 bg-blue-500 py-3 px-6 text-lg text-white hover:bg-blue-600 focus:outline-none active:bg-blue-700"
             >
-              無料ではじめる
+              <Link to="/signup">無料ではじめる</Link>
             </button>
           </div>
         </div>
@@ -56,7 +57,7 @@ const Overview: VFC = () => (
               type="button"
               className="inline-flex rounded border-0 bg-blue-500 py-3 px-6 text-lg text-white hover:bg-blue-600 focus:outline-none active:bg-blue-700"
             >
-              無料ではじめる
+              <Link to="/signup">無料ではじめる</Link>
             </button>
           </div>
         </div>
