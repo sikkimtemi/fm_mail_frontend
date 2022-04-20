@@ -2,7 +2,7 @@ import React, { VFC } from 'react';
 import Header1 from '../Header1';
 import Footer from '../Footer';
 
-export type Props = { children: React.ReactNode };
+type Props = { children: React.ReactNode };
 
 const PublicLayout: VFC<Props> = ({ children }) => (
   <>

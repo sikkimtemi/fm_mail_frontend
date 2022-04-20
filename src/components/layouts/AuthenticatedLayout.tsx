@@ -8,7 +8,7 @@ import Spinner from '../Spinner';
 import stateCurrentUser from '../../atom/User';
 import type { CognitoUser } from '../../atom/User';
 
-export type Props = { children: React.ReactNode };
+type Props = { children: React.ReactNode };
 type UserValue = CognitoUser | null;
 type UserUpdate = CognitoUser | null;
 type UserResult = void;
