@@ -1,7 +1,6 @@
 import { useEffect, useState, VFC } from 'react';
 import { useAtom } from 'jotai';
 import ky from 'ky';
-import type { CognitoUser } from '../atom/User';
 import stateCurrentUser from '../atom/User';
 import Spinner from './Spinner';
 import Image1 from '../svg/undraw_content_team_3epn.svg';
@@ -25,7 +24,7 @@ const randomImage = [Image1, Image2, Image3, Image4][
 
 const APIKey: VFC = () => {
   // サインイン中のユーザー情報
-  const [user] = useAtom<CognitoUser | null>(stateCurrentUser);
+  const [user] = useAtom(stateCurrentUser);
 
   // 読込中フラグ
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,7 +44,7 @@ const APIKey: VFC = () => {
               ' https://zytxynwnz3.execute-api.ap-northeast-1.amazonaws.com/api/apikey',
               {
                 headers: {
-                  Authorization: `Bearer ${user?.signInUserSession.idToken.jwtToken}`,
+                  Authorization: `Bearer ${user.signInUserSession.idToken.jwtToken}`,
                 },
               },
             )

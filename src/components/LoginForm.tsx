@@ -2,12 +2,11 @@ import { VFC } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
-import type { CognitoUser } from '../atom/User';
 import stateCurrentUser from '../atom/User';
 
 const LoginForm: VFC = () => {
   // サインイン中のユーザー情報
-  const [user] = useAtom<CognitoUser | null>(stateCurrentUser);
+  const [user] = useAtom(stateCurrentUser);
 
   // ログイン済みの場合はマイページに遷移
   if (user) return <Navigate to="/mypage" replace />;
