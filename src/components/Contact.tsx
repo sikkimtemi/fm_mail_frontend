@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from '@xzar90/react-router-hash-link';
 
 const Contact: VFC = () => (
   <section id="Contact" className="bg-gray-100 py-6 sm:py-8 lg:py-12">
@@ -9,7 +9,13 @@ const Contact: VFC = () => (
           お問い合わせ
         </h2>
       </div>
-      <form className="mx-auto grid max-w-screen-md gap-4">
+      <form
+        className="mx-auto grid max-w-screen-md gap-4"
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        action="/thanks"
+      >
         <div className="sm:col-span-2">
           <label htmlFor="name" className="text-sm text-gray-800 sm:text-base">
             お名前<span className="required-dot text-red-500">*</span>
@@ -55,7 +61,7 @@ const Contact: VFC = () => (
 
         <div className="flex items-center justify-between sm:col-span-2">
           <button
-            type="button"
+            type="submit"
             className="inline-flex rounded border-0 bg-blue-500 py-3 px-6 text-lg text-white hover:bg-blue-600 focus:outline-none active:bg-blue-700"
           >
             送信

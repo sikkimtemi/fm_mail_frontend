@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from '@xzar90/react-router-hash-link';
 import Logo from '../svg/FM_Mail_logo.svg';
 
 const Header1: VFC = () => (
