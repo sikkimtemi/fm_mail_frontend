@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import MailReciveImg from '../img/mail_receive.png';
 
 const body = `
 # FM Mailの使い方
 
 ここに使い方を載せる予定。
 
-![テスト](/src/img/mail_receive.png)
+![テスト](${MailReciveImg})
 
 key|value
 -|-
