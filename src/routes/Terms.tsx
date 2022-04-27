@@ -1,9 +1,9 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import TermsContent from '../components/TermsContent';
 import PublicLayout from '../components/layouts/PublicLayout';
 
 // 利用規約
-const Terms: VFC = () => (
+const Terms: FC = () => (
   <PublicLayout>
     <TermsContent />
   </PublicLayout>

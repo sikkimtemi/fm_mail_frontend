@@ -1,11 +1,11 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import { HashLink } from '@xzar90/react-router-hash-link';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import stateCurrentUser from '../atom/User';
 
-const SignupForm: VFC = () => {
+const SignupForm: FC = () => {
   // サインイン中のユーザー情報
   const [user] = useAtom(stateCurrentUser);
 

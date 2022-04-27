@@ -1,11 +1,11 @@
-import React, { VFC } from 'react';
+import React, { FC } from 'react';
 
 type SpacerProps = {
   size: number;
   horizontal?: boolean;
 };
 
-const Spacer: VFC<SpacerProps> = ({ size, horizontal }) => (
+const Spacer: FC<SpacerProps> = ({ size, horizontal }) => (
   <div
     style={
       horizontal
@@ -19,4 +19,8 @@ const Spacer: VFC<SpacerProps> = ({ size, horizontal }) => (
     }
   />
 );
+
+Spacer.defaultProps = {
+  horizontal: false,
+};
 export default Spacer;

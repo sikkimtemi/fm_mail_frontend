@@ -1,7 +1,7 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-const Price: VFC = () => (
+const Price: FC = () => (
   <section id="Price" className="body-font overflow-hidden text-gray-600">
     <div className="container mx-auto px-5 py-24">
       <div className="mb-20 flex w-full flex-col text-center">

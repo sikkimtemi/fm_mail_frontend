@@ -1,6 +1,6 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 
-const Feature: VFC = () => (
+const Feature: FC = () => (
   <section id="Feature" className="body-font bg-gray-100 text-gray-600">
     <div className="container mx-auto px-5 py-24">
       <h1 className="title-font mb-20 text-center text-2xl font-medium text-gray-900 sm:text-3xl">

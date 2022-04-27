@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { useAtom } from 'jotai';
 import ky from 'ky';
 import stateCurrentUser from '../atom/User';
@@ -22,7 +22,7 @@ const randomImage = [Image1, Image2, Image3, Image4][
   Math.floor(Math.random() * 4)
 ];
 
-const APIKey: VFC = () => {
+const APIKey: FC = () => {
   // サインイン中のユーザー情報
   const [user] = useAtom(stateCurrentUser);
 

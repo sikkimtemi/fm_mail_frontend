@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useState, VFC } from 'react';
+import { useState, FC } from 'react';
 import { Auth } from 'aws-amplify';
 import Logo from '../svg/FM_Mail_logo.svg';
 
-const Header2: VFC = () => {
+const Header2: FC = () => {
   // 通知プルダウンの制御用
   const [isNoticeOpen, setIsNoticeOpen] = useState(false);
 

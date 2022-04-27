@@ -1,9 +1,9 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import NotFound from '../svg/undraw_page_not_found_re_e9o6.svg';
 
 // 404ページ
-const NoMatch: VFC = () => (
+const NoMatch: FC = () => (
   <main>
     <section className="bg-white py-6 sm:py-8 lg:py-12">
       <div className="mx-auto max-w-screen-lg px-4 md:px-8">

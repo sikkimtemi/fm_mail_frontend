@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { useState, FC } from 'react';
 
 type ApiKeyInfo = {
   Type: string;
@@ -9,7 +9,7 @@ type Props = {
   item: ApiKeyInfo;
 };
 
-const APIKeyList: VFC<Props> = ({ index, item }) => {
+const APIKeyList: FC<Props> = ({ index, item }) => {
   // コピー済みツールチップの表示制御用
   const [isCopied, setIsCopied] = useState<boolean>(false);
 

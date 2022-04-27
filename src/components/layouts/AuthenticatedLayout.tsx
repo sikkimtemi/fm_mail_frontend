@@ -1,4 +1,4 @@
-import React, { VFC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import { Navigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import type { CognitoUser } from '../../atom/User';
 
 type Props = { children: React.ReactNode };
 
-const AuthenticatedLayout: VFC<Props> = ({ children }) => {
+const AuthenticatedLayout: FC<Props> = ({ children }) => {
   // サインイン中のユーザー情報
   const [user, setUser] = useAtom(stateCurrentUser);
 

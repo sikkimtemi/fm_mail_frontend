@@ -1,10 +1,10 @@
-import React, { VFC } from 'react';
+import React, { FC } from 'react';
 import Header1 from '../Header1';
 import Footer from '../Footer';
 
 type Props = { children: React.ReactNode };
 
-const PublicLayout: VFC<Props> = ({ children }) => (
+const PublicLayout: FC<Props> = ({ children }) => (
   <>
     <header>
       <Header1 />

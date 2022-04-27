@@ -1,9 +1,9 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import PrivacyPolicyContent from '../components/PrivacyPolicyContent';
 import PublicLayout from '../components/layouts/PublicLayout';
 
 // プライバシーポリシー
-const PrivacyPolicy: VFC = () => (
+const PrivacyPolicy: FC = () => (
   <PublicLayout>
     <PrivacyPolicyContent />
   </PublicLayout>
