@@ -15,6 +15,7 @@ const Contact: VFC = () => (
         name="contact"
         method="POST"
         data-netlify="true"
+        action="/dummy_thanks.html"
       >
         <div className="sm:col-span-2">
           <label htmlFor="name" className="text-sm text-gray-800 sm:text-base">
