@@ -8,7 +8,7 @@ const UpgradeContent: FC = () => {
 
   // Stripe決済用URL
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  const stripeUrl = `https://zytxynwnz3.execute-api.ap-northeast-1.amazonaws.com/api/create-checkout-session/FMMailPro/${user?.username}`;
+  const stripeUrl = `https://wmhp7vrh26.execute-api.ap-northeast-1.amazonaws.com/api/create-checkout-session/FMMailPro/${user?.username}`;
 
   return (
     <section className="bg-white py-6 sm:py-8 lg:py-12">
