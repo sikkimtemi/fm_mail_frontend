@@ -1,15 +1,15 @@
 import { FC } from 'react';
-import ThanksContent from '../components/ThanksContent';
+import CanceledContent from '../components/CanceledContent';
 import Spacer from '../components/Spacer';
 import PublicLayout from '../components/layouts/PublicLayout';
 import type { ThanksProps } from '../components/ThanksContent';
 
-// 公開ページのサンクス画面
-const Thanks: FC<ThanksProps> = ({ message }) => (
+// 公開ページのキャンセル画面
+const Canceled: FC<ThanksProps> = ({ message }) => (
   <PublicLayout>
-    <ThanksContent message={message} />
+    <CanceledContent message={message} />
     <Spacer size={50} />
   </PublicLayout>
 );
 
-export default Thanks;
+export default Canceled;

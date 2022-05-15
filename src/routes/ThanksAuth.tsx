@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import ThanksContent from '../components/ThanksContent';
 import Spacer from '../components/Spacer';
-import PublicLayout from '../components/layouts/PublicLayout';
+import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
 import type { ThanksProps } from '../components/ThanksContent';
 
-// 公開ページのサンクス画面
+// 認証後のサンクス画面
 const Thanks: FC<ThanksProps> = ({ message }) => (
-  <PublicLayout>
+  <AuthenticatedLayout>
     <ThanksContent message={message} />
     <Spacer size={50} />
-  </PublicLayout>
+  </AuthenticatedLayout>
 );
 
 export default Thanks;
