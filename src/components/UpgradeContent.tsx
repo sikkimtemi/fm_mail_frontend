@@ -1,14 +1,31 @@
 import { FC } from 'react';
 import { useAtom } from 'jotai';
 import stateCurrentUser from '../atom/User';
+import stateUserAttribute from '../atom/UserAttribute';
 
 const UpgradeContent: FC = () => {
-  // サインイン中のユーザー情報
+  // サインイン中のユーザー情報とユーザー属性
   const [user] = useAtom(stateCurrentUser);
+  const [userAttribute] = useAtom(stateUserAttribute);
+  const username = user?.username;
+  const planType = userAttribute?.planType;
 
   // Stripe決済用URL
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  const stripeUrl = `https://wmhp7vrh26.execute-api.ap-northeast-1.amazonaws.com/api/create-checkout-session/FMMailPro/${user?.username}`;
+  const stripeUrl = `${
+    import.meta.env.VITE_STRIPE_BASE_URL
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  }/create-checkout-session/FMMailPro/${username}`;
+
+  if (planType === 'PRO') {
+    return (
+      <section className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="mx-auto max-w-screen-md px-4 md:px-8">
+          <h1 className="mb-8 text-4xl font-bold">アップグレード済み</h1>
+          <p className="mb-4">アップグレード済みです。</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-white py-6 sm:py-8 lg:py-12">

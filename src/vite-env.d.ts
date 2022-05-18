@@ -7,6 +7,7 @@ interface ImportMetaEnv {
   readonly VITE_OAUTH_DOMAIN: string;
   readonly VITE_OAUTH_REDIRECT_SIGN_IN: string;
   readonly VITE_OAUTH_REDIRECT_SIGN_OUT: string;
+  readonly VITE_STRIPE_BASE_URL: string;
 }
 
 interface ImportMeta {
