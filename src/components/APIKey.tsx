@@ -32,6 +32,9 @@ const APIKey: FC = () => {
   // APIキー
   const [apiKeys, setApiKeys] = useState<ApiKeyInfo[] | null>(null);
 
+  // DynamoDBアクセス用URL
+  const url = `${import.meta.env.VITE_DYNAMODB_BASE_URL}/apikey`;
+
   // DynamoDBからAPIキーを取得する
   useEffect(() => {
     // awaitを扱うため、いったん非同期関数を作ってから呼び出している
@@ -40,14 +43,11 @@ const APIKey: FC = () => {
         if (user) {
           // Lambda経由でDynamoDBにアクセスする
           const res: Resp = await ky
-            .get(
-              ' https://zytxynwnz3.execute-api.ap-northeast-1.amazonaws.com/api/apikey',
-              {
-                headers: {
-                  Authorization: `Bearer ${user.signInUserSession.idToken.jwtToken}`,
-                },
+            .get(url, {
+              headers: {
+                Authorization: `Bearer ${user.signInUserSession.idToken.jwtToken}`,
               },
-            )
+            })
             .json();
           if (res.result.Items) setApiKeys(res.result.Items);
         }
@@ -59,7 +59,7 @@ const APIKey: FC = () => {
 
     // Promiseを無視して呼び出すことを明示するためvoidを付けている
     void getApiKeys();
-  }, [user]);
+  }, [url, user]);
 
   // APIキーを取得できたらローディング表示をやめる
   useEffect(() => {
