@@ -1,7 +1,14 @@
 import { FC } from 'react';
 import { useAtom } from 'jotai';
+import ky from 'ky';
 import stateCurrentUser from '../atom/User';
 import stateUserAttribute from '../atom/UserAttribute';
+import upgradeImage from '../svg/undraw_upgrade_-06-a0.svg';
+import Spacer from './Spacer';
+
+type BillingPortalResponse = {
+  billing_portal_url: string;
+};
 
 const UpgradeContent: FC = () => {
   // サインイン中のユーザー情報とユーザー属性
@@ -9,6 +16,7 @@ const UpgradeContent: FC = () => {
   const [userAttribute] = useAtom(stateUserAttribute);
   const username = user?.username;
   const planType = userAttribute?.planType;
+  const stripeSessionId = userAttribute?.stripeSessionId;
 
   // Stripe決済用URL
   const stripeUrl = `${
@@ -16,12 +24,45 @@ const UpgradeContent: FC = () => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   }/create-checkout-session/FMMailPro/${username}`;
 
+  // Stripeの請求ポータル呼び出し用URL
+  const stripeMyPortalUrl = `${
+    import.meta.env.VITE_STRIPE_BASE_URL
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  }/create-billing-portal/${stripeSessionId}`;
+
+  // 請求ポータルを呼び出す
+  const openBillingPortal = async () => {
+    if (!user) return;
+    const resp: BillingPortalResponse = await ky
+      .get(stripeMyPortalUrl, {
+        headers: {
+          Authorization: `Bearer ${user.signInUserSession.idToken.jwtToken}`,
+        },
+      })
+      .json();
+    // 請求ポータルに移動
+    window.location.href = resp.billing_portal_url;
+  };
+
   if (planType === 'PRO') {
     return (
       <section className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-md px-4 md:px-8">
-          <h1 className="mb-8 text-4xl font-bold">アップグレード済み</h1>
+          <h1 className="mb-8 text-4xl font-bold">アップグレード</h1>
           <p className="mb-4">アップグレード済みです。</p>
+          <img src={upgradeImage} alt="アップグレード済み" />
+          <Spacer size={30} />
+          <button
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={() => openBillingPortal()}
+            type="button"
+            className="inline-flex rounded border-0 bg-blue-500 py-3 px-6 text-lg text-white hover:bg-blue-600 focus:outline-none active:bg-blue-700"
+          >
+            請求ポータルを表示
+          </button>
+          <p className="text-sm text-gray-500">
+            ※Stripe（決済サイト）の請求ポータルに移動します。
+          </p>
         </div>
       </section>
     );
