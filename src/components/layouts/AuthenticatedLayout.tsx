@@ -39,10 +39,13 @@ const AuthenticatedLayout: FC<Props> = ({ children }) => {
         const planType = userAttributes.find(
           (obj) => obj.Name === 'custom:plan_type',
         )?.Value;
-        const stripeSessionId = userAttributes.find(
-          (obj) => obj.Name === 'custom:stripe_session_id',
+        const stripeCustomerId = userAttributes.find(
+          (obj) => obj.Name === 'custom:stripe_customer_id',
         )?.Value;
-        const myAttribute: CognitoUserAttribute = { planType, stripeSessionId };
+        const myAttribute: CognitoUserAttribute = {
+          planType,
+          stripeCustomerId,
+        };
         // ユーザー情報をJotaiで管理（これをトリガーにもう一つのEffect Hookが動く）
         setUser(currentUser);
         // ユーザー属性をJotaiで管理

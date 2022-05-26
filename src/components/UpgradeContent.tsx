@@ -16,7 +16,6 @@ const UpgradeContent: FC = () => {
   const [userAttribute] = useAtom(stateUserAttribute);
   const username = user?.username;
   const planType = userAttribute?.planType;
-  const stripeSessionId = userAttribute?.stripeSessionId;
 
   // Stripe決済用URL
   const stripeUrl = `${
@@ -27,10 +26,9 @@ const UpgradeContent: FC = () => {
   // Stripeの請求ポータル呼び出し用URL
   const stripeMyPortalUrl = `${
     import.meta.env.VITE_STRIPE_BASE_URL
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  }/create-billing-portal/${stripeSessionId}`;
+  }/create-billing-portal-by-user`;
 
-  // 請求ポータルを呼び出す
+  // Stripe請求ポータルを呼び出す
   const openBillingPortal = async () => {
     if (!user) return;
     const resp: BillingPortalResponse = await ky
@@ -40,7 +38,7 @@ const UpgradeContent: FC = () => {
         },
       })
       .json();
-    // 請求ポータルに移動
+    // Stripe請求ポータルに移動
     window.location.href = resp.billing_portal_url;
   };
 
