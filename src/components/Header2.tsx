@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState, FC } from 'react';
 import { Auth } from 'aws-amplify';
+import { useAtom } from 'jotai';
+import Avatar from 'boring-avatars';
 import Logo from '../svg/FM_Mail_logo.svg';
+import stateCurrentUser from '../atom/User';
 
 const Header2: FC = () => {
   // 通知プルダウンの制御用
@@ -9,6 +12,10 @@ const Header2: FC = () => {
 
   // ユーザー情報プルダウンの制御用
   const [isUserOpen, setIsUserOpen] = useState(false);
+
+  // サインイン中のユーザー情報
+  const [user] = useAtom(stateCurrentUser);
+  const userName = user?.username;
 
   // 通知アイコンクリック時の処理
   const handleNoticeClick = () => {
@@ -131,14 +138,21 @@ const Header2: FC = () => {
                   onClick={handleUserClick}
                 >
                   <div className="h-8 w-8 overflow-hidden rounded-full border-2 border-gray-400">
-                    <img
-                      src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                      className="h-full w-full object-cover"
-                      alt="avatar"
+                    <Avatar
+                      size={28}
+                      name={userName}
+                      variant="beam"
+                      colors={[
+                        '#FFBD87',
+                        '#FFD791',
+                        '#F7E8A6',
+                        '#D9E8AE',
+                        '#BFE3C0',
+                      ]}
                     />
                   </div>
                   <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
-                    Khatab wedaa
+                    ユーザーメニュー
                   </h3>
                 </button>
                 <div

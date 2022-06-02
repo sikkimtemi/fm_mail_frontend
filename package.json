@@ -16,6 +16,7 @@
     "@tailwindcss/typography": "^0.5.2",
     "@xzar90/react-router-hash-link": "^6.0.4",
     "aws-amplify": "^4.3.18",
+    "boring-avatars": "^1.6.3",
     "jotai": "^1.6.2",
     "ky": "^0.30.0",
     "react": "^18.0.0",
