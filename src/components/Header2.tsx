@@ -3,6 +3,7 @@ import { useState, FC } from 'react';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import Avatar from 'boring-avatars';
+import OutsideClickHandler from 'react-outside-click-handler';
 import Logo from '../svg/FM_Mail_logo.svg';
 import stateCurrentUser from '../atom/User';
 
@@ -10,23 +11,29 @@ const Header2: FC = () => {
   // 通知プルダウンの制御用
   const [isNoticeOpen, setIsNoticeOpen] = useState(false);
 
-  // ユーザー情報プルダウンの制御用
+  // ユーザーメニュープルダウンの制御用
   const [isUserOpen, setIsUserOpen] = useState(false);
 
   // サインイン中のユーザー情報
   const [user] = useAtom(stateCurrentUser);
   const userName = user?.username;
 
-  // 通知アイコンクリック時の処理
+  // 通知アイコンをクリックしたときの処理
   const handleNoticeClick = () => {
     setIsNoticeOpen((t) => !t);
     setIsUserOpen(false);
   };
 
-  // ユーザーアイコンクリック時の処理
+  // ユーザーアイコンをクリックしたときの処理
   const handleUserClick = () => {
     setIsNoticeOpen(false);
     setIsUserOpen((t) => !t);
+  };
+
+  // メニューの外側をクリックしたときの処理
+  const handleOuterClick = () => {
+    setIsNoticeOpen(false);
+    setIsUserOpen(false);
   };
 
   return (
@@ -82,107 +89,110 @@ const Header2: FC = () => {
               </Link>
             </div>
 
-            <div className="relative mt-4 flex md:mt-0">
-              <div className="relative inline-block">
-                <button
-                  id="isNoticeOpenButton"
-                  type="button"
-                  className="mx-4 hidden h-full transform text-gray-600 transition-colors duration-200 hover:text-gray-700 focus:text-gray-700 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400 md:block"
-                  aria-label="show notifications"
-                  onClick={handleNoticeClick}
-                >
-                  <svg
-                    className="h-6 w-6"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+            <OutsideClickHandler onOutsideClick={() => handleOuterClick()}>
+              <div className="relative mt-4 flex md:mt-0">
+                <div className="relative inline-block">
+                  <button
+                    id="isNoticeOpenButton"
+                    type="button"
+                    className="mx-4 hidden h-full transform text-gray-600 transition-colors duration-200 hover:text-gray-700 focus:text-gray-700 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400 md:block"
+                    aria-label="show notifications"
+                    onClick={() => handleNoticeClick()}
                   >
-                    <path
-                      d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                <div
-                  className={`absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
-                    isNoticeOpen ? '' : 'hidden'
-                  }`}
-                >
-                  <ul
-                    className="divide-y divide-gray-100 py-1"
-                    aria-labelledby="isNoticeOpenButton"
+                    <svg
+                      className="h-6 w-6"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    className={`absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
+                      isNoticeOpen ? '' : 'hidden'
+                    }`}
                   >
-                    <li>
-                      <p className="mx-2 text-sm text-gray-600 dark:text-white">
-                        【FM
-                        Mailからのお知らせ】：PROプラン１か月無料キャンペーン
-                      </p>
-                    </li>
-                    <li>
-                      <p className="mx-2 text-sm text-gray-600 dark:text-white">
-                        【FM Mailからのお知らせ】：ご登録ありあがとうございます
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="relative inline-block">
-                <button
-                  id="isUserOpenButton"
-                  type="button"
-                  className="flex items-center focus:outline-none"
-                  aria-label="toggle profile dropdown"
-                  onClick={handleUserClick}
-                >
-                  <div className="h-8 w-8 overflow-hidden rounded-full border-2 border-gray-400">
-                    <Avatar
-                      size={28}
-                      name={userName}
-                      variant="beam"
-                      colors={[
-                        '#FFBD87',
-                        '#FFD791',
-                        '#F7E8A6',
-                        '#D9E8AE',
-                        '#BFE3C0',
-                      ]}
-                    />
+                    <ul
+                      className="divide-y divide-gray-100 py-1"
+                      aria-labelledby="isNoticeOpenButton"
+                    >
+                      <li>
+                        <p className="mx-2 text-sm text-gray-600 dark:text-white">
+                          【FM
+                          Mailからのお知らせ】：PROプラン１か月無料キャンペーン
+                        </p>
+                      </li>
+                      <li>
+                        <p className="mx-2 text-sm text-gray-600 dark:text-white">
+                          【FM
+                          Mailからのお知らせ】：ご登録ありあがとうございます
+                        </p>
+                      </li>
+                    </ul>
                   </div>
-                  <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
-                    ユーザーメニュー
-                  </h3>
-                </button>
-                <div
-                  className={`absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
-                    isUserOpen ? '' : 'hidden'
-                  }`}
-                >
-                  <ul className="py-1" aria-labelledby="dropdownButton">
-                    <li>
-                      <Link
-                        to="/settings"
-                        className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        ユーザー設定
-                      </Link>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
-                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                        onClick={() => Auth.signOut()}
-                      >
-                        ログアウト
-                      </button>
-                    </li>
-                  </ul>
+                </div>
+                <div className="relative inline-block">
+                  <button
+                    id="isUserOpenButton"
+                    type="button"
+                    className="flex items-center focus:outline-none"
+                    aria-label="toggle profile dropdown"
+                    onClick={() => handleUserClick()}
+                  >
+                    <div className="h-8 w-8 overflow-hidden rounded-full border-2 border-gray-400">
+                      <Avatar
+                        size={28}
+                        name={userName}
+                        variant="beam"
+                        colors={[
+                          '#FFBD87',
+                          '#FFD791',
+                          '#F7E8A6',
+                          '#D9E8AE',
+                          '#BFE3C0',
+                        ]}
+                      />
+                    </div>
+                    <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200 md:hidden">
+                      ユーザーメニュー
+                    </h3>
+                  </button>
+                  <div
+                    className={`absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
+                      isUserOpen ? '' : 'hidden'
+                    }`}
+                  >
+                    <ul className="py-1" aria-labelledby="dropdownButton">
+                      <li>
+                        <Link
+                          to="/settings"
+                          className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          ユーザー設定
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                          onClick={() => Auth.signOut()}
+                        >
+                          ログアウト
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
+            </OutsideClickHandler>
           </div>
         </div>
       </div>
