@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import { Navigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import stateUserAttribute from '../../atom/UserAttribute';
 import type { CognitoUser } from '../../atom/User';
 import type { CognitoUserAttribute } from '../../atom/UserAttribute';
 
-type Props = { children: React.ReactNode };
+type Props = { children: ReactNode };
 
 const AuthenticatedLayout: FC<Props> = ({ children }) => {
   // サインイン中のユーザー情報

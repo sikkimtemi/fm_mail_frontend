@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import Header1 from '../Header1';
 import Footer from '../Footer';
 
-type Props = { children: React.ReactNode };
+type Props = { children: ReactNode };
 
 const PublicLayout: FC<Props> = ({ children }) => (
   <>
