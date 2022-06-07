@@ -1,6 +1,7 @@
 import { atom } from 'jotai';
 
 export type CognitoUserAttribute = {
+  email: string | undefined;
   planType: string | undefined;
   stripeCustomerId: string | undefined;
 };

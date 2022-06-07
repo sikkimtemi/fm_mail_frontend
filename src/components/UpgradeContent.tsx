@@ -1,14 +1,10 @@
 import { FC } from 'react';
 import { useAtom } from 'jotai';
-import ky from 'ky';
 import stateCurrentUser from '../atom/User';
 import stateUserAttribute from '../atom/UserAttribute';
 import upgradeImage from '../svg/undraw_upgrade_-06-a0.svg';
 import Spacer from './Spacer';
-
-type BillingPortalResponse = {
-  billing_portal_url: string;
-};
+import openBillingPortal from '../function/StripeUtil';
 
 const UpgradeContent: FC = () => {
   // サインイン中のユーザー情報とユーザー属性
@@ -23,25 +19,6 @@ const UpgradeContent: FC = () => {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   }/create-checkout-session/FMMailPro/${username}`;
 
-  // Stripeの請求ポータル呼び出し用URL
-  const stripeMyPortalUrl = `${
-    import.meta.env.VITE_STRIPE_BASE_URL
-  }/create-billing-portal-by-user`;
-
-  // Stripe請求ポータルを呼び出す
-  const openBillingPortal = async () => {
-    if (!user) return;
-    const resp: BillingPortalResponse = await ky
-      .get(stripeMyPortalUrl, {
-        headers: {
-          Authorization: `Bearer ${user.signInUserSession.idToken.jwtToken}`,
-        },
-      })
-      .json();
-    // Stripe請求ポータルに移動
-    window.location.href = resp.billing_portal_url;
-  };
-
   if (planType === 'PRO') {
     return (
       <section className="bg-white py-6 sm:py-8 lg:py-12">
@@ -52,7 +29,7 @@ const UpgradeContent: FC = () => {
           <Spacer size={30} />
           <button
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => openBillingPortal()}
+            onClick={() => openBillingPortal(user)}
             type="button"
             className="inline-flex rounded border-0 bg-blue-500 py-3 px-6 text-lg text-white hover:bg-blue-600 focus:outline-none active:bg-blue-700"
           >

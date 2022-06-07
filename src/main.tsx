@@ -21,6 +21,7 @@ import Terms from './routes/Terms';
 import Tokusyouhou from './routes/Tokusyouhou';
 import ShowAPIKey from './routes/ShowAPIKey';
 import Upgrade from './routes/Upgrade';
+import UserInfo from './routes/UserInfo';
 
 // Amplifyの初期設定
 Amplify.configure(awsExports);
@@ -66,6 +67,7 @@ root.render(
           />
           <Route path="tokusyouhou" element={<Tokusyouhou />} />
           <Route path="upgrade" element={<Upgrade />} />
+          <Route path="userinfo" element={<UserInfo />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
         {process.env.NODE_ENV === 'development' && (

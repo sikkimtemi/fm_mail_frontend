@@ -36,6 +36,7 @@ const AuthenticatedLayout: FC<Props> = ({ children }) => {
         // Cognitoのユーザー属性を取得する
         const userAttributes = await Auth.userAttributes(currentUser);
         // カスタム属性を取り出す
+        const email = userAttributes.find((obj) => obj.Name === 'email')?.Value;
         const planType = userAttributes.find(
           (obj) => obj.Name === 'custom:plan_type',
         )?.Value;
@@ -43,6 +44,7 @@ const AuthenticatedLayout: FC<Props> = ({ children }) => {
           (obj) => obj.Name === 'custom:stripe_customer_id',
         )?.Value;
         const myAttribute: CognitoUserAttribute = {
+          email,
           planType,
           stripeCustomerId,
         };

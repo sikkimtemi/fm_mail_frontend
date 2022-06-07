@@ -172,10 +172,10 @@ const Header2: FC = () => {
                     <ul className="py-1" aria-labelledby="dropdownButton">
                       <li>
                         <Link
-                          to="/settings"
+                          to="/userinfo"
                           className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
-                          ユーザー設定
+                          ユーザー情報
                         </Link>
                       </li>
                       <li>
