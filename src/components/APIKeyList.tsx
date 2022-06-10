@@ -9,7 +9,7 @@ type Props = {
   item: ApiKeyInfo;
 };
 
-const APIKeyList: FC<Props> = ({ index, item }) => {
+const ApiKeyList: FC<Props> = ({ index, item }) => {
   // コピー済みツールチップの表示制御用
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
@@ -64,4 +64,4 @@ const APIKeyList: FC<Props> = ({ index, item }) => {
     </tr>
   );
 };
-export default APIKeyList;
+export default ApiKeyList;

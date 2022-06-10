@@ -19,7 +19,7 @@ import Thanks from './routes/Thanks';
 import ThanksAuth from './routes/ThanksAuth';
 import Terms from './routes/Terms';
 import Tokusyouhou from './routes/Tokusyouhou';
-import ShowAPIKey from './routes/ShowAPIKey';
+import ShowApiKey from './routes/ShowApiKey';
 import Upgrade from './routes/Upgrade';
 import UserInfo from './routes/UserInfo';
 
@@ -48,7 +48,7 @@ root.render(
       <QueryClientProvider client={queryClient}>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="api_key" element={<ShowAPIKey />} />
+          <Route path="api_key" element={<ShowApiKey />} />
           <Route path="cancel" element={<Canceled message="" />} />
           <Route
             path="canceled_upgrade"

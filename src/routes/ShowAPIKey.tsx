@@ -1,14 +1,14 @@
 import { FC } from 'react';
-import APIKey from '../components/APIKey';
+import ApiKey from '../components/ApiKey';
 import Spacer from '../components/Spacer';
 import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
 
 // APIキー確認ページ
-const ShowAPIKey: FC = () => (
+const ShowApiKey: FC = () => (
   <AuthenticatedLayout>
-    <APIKey />
+    <ApiKey />
     <Spacer size={50} />
   </AuthenticatedLayout>
 );
 
-export default ShowAPIKey;
+export default ShowApiKey;

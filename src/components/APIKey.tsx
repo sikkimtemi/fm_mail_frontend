@@ -7,7 +7,7 @@ import Image1 from '../svg/undraw_content_team_3epn.svg';
 import Image2 from '../svg/undraw_real_time_analytics_re_yliv.svg';
 import Image3 from '../svg/undraw_react_y-7-wq.svg';
 import Image4 from '../svg/undraw_remotely_-2-j6y.svg';
-import APIKeyList from './APIKeyList';
+import ApiKeyList from './ApiKeyList';
 
 type ApiKeyInfo = {
   Type: string;
@@ -22,7 +22,7 @@ const randomImage = [Image1, Image2, Image3, Image4][
   Math.floor(Math.random() * 4)
 ];
 
-const APIKey: FC = () => {
+const ApiKey: FC = () => {
   // サインイン中のユーザー情報
   const [user] = useAtom(stateCurrentUser);
 
@@ -111,7 +111,7 @@ const APIKey: FC = () => {
           <tbody>
             {apiKeys &&
               apiKeys.map((item: ApiKeyInfo, index: number) => (
-                <APIKeyList item={item} index={index} key={item.ApiKey} />
+                <ApiKeyList item={item} index={index} key={item.ApiKey} />
               ))}
           </tbody>
         </table>
@@ -126,4 +126,4 @@ const APIKey: FC = () => {
     </section>
   );
 };
-export default APIKey;
+export default ApiKey;
