@@ -53,7 +53,8 @@ const AuthenticatedLayout: FC<Props> = ({ children }) => {
         // ユーザー属性をJotaiで管理
         setUserAttribute(myAttribute);
       } catch (e) {
-        // サインインしていない場合はログイン画面に遷移させる
+        // 認証に失敗したらサインアウトしてからログイン画面に遷移させる
+        await Auth.signOut();
         setLoginRequired(true);
       }
     };
