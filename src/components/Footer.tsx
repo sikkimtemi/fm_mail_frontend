@@ -23,7 +23,7 @@ const Footer: FC = () => (
           </div>
 
           <p className="mb-6 text-gray-400 sm:pr-8">
-            FileMaker®の標準機能だけでメール受信を可能にするWEBサービス
+            FileMaker®の標準機能だけでメール受信を可能にするWebサービス
           </p>
 
           <div className="flex gap-4">
