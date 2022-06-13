@@ -115,7 +115,7 @@ const Header2: FC = () => {
                     </svg>
                   </button>
                   <div
-                    className={`absolute right-0 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
+                    className={`absolute right-0 mt-2 w-60 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800 ${
                       isNoticeOpen ? '' : 'hidden'
                     }`}
                   >
@@ -124,16 +124,12 @@ const Header2: FC = () => {
                       aria-labelledby="isNoticeOpenButton"
                     >
                       <li>
-                        <p className="mx-2 text-sm text-gray-600 dark:text-white">
-                          【FM
-                          Mailからのお知らせ】：PROプラン１か月無料キャンペーン
-                        </p>
-                      </li>
-                      <li>
-                        <p className="mx-2 text-sm text-gray-600 dark:text-white">
-                          【FM
-                          Mailからのお知らせ】：ご登録ありあがとうございます
-                        </p>
+                        <Link
+                          to="/welcome"
+                          className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          【お知らせ】ご登録ありがとうございます
+                        </Link>
                       </li>
                     </ul>
                   </div>

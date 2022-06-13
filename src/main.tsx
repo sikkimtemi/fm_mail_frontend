@@ -20,6 +20,7 @@ import Tokusyouhou from './routes/Tokusyouhou';
 import ShowApiKey from './routes/ShowApiKey';
 import Upgrade from './routes/Upgrade';
 import UserInfo from './routes/UserInfo';
+import Welcome from './routes/Welcome';
 
 // Amplifyの初期設定
 Amplify.configure(awsExports);
@@ -52,6 +53,7 @@ root.render(
         <Route path="tokusyouhou" element={<Tokusyouhou />} />
         <Route path="upgrade" element={<Upgrade />} />
         <Route path="userinfo" element={<UserInfo />} />
+        <Route path="welcome" element={<Welcome />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </BrowserRouter>
