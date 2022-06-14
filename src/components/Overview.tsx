@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import newsletter from '../svg/undraw_newsletter_re_wrob.svg';
-import mailReceive from '../img/mail_receive.png';
+import mailReceive from '../img/mail_receive_sample001.png';
 
 const Overview: FC = () => (
   <>
