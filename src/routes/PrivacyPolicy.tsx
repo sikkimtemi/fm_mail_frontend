@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import PrivacyPolicyContent from '../components/PrivacyPolicyContent';
-import PublicLayout from '../components/layouts/PublicLayout';
+import PublicLayout from '../layouts/PublicLayout';
 
 // プライバシーポリシー
 const PrivacyPolicy: FC = () => (

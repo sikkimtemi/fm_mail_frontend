@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import DocContent from '../components/DocContent';
-import PublicLayout from '../components/layouts/PublicLayout';
+import PublicLayout from '../layouts/PublicLayout';
 
 // 使い方ガイド
 const Doc: FC = () => (

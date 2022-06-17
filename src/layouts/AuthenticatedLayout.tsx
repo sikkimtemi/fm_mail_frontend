@@ -2,13 +2,13 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useAtom } from 'jotai';
 import { Navigate } from 'react-router-dom';
-import Header2 from '../Header2';
-import Footer from '../Footer';
-import Spinner from '../Spinner';
-import stateCurrentUser from '../../atom/User';
-import stateUserAttribute from '../../atom/UserAttribute';
-import type { CognitoUser } from '../../atom/User';
-import type { CognitoUserAttribute } from '../../atom/UserAttribute';
+import Header2 from '../components/Header2';
+import Footer from '../components/Footer';
+import Spinner from '../components/Spinner';
+import stateCurrentUser from '../atom/User';
+import stateUserAttribute from '../atom/UserAttribute';
+import type { CognitoUser } from '../atom/User';
+import type { CognitoUserAttribute } from '../atom/UserAttribute';
 
 type Props = { children: ReactNode };
 

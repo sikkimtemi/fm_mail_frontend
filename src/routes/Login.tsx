@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import LoginForm from '../components/LoginForm';
 import Spacer from '../components/Spacer';
-import PublicLayout from '../components/layouts/PublicLayout';
+import PublicLayout from '../layouts/PublicLayout';
 
 // ログイン画面
 const Login: FC = () => (

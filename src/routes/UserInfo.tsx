@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import UserInfoContent from '../components/UserInfoContent';
-import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '../layouts/AuthenticatedLayout';
 
 // ユーザー情報
 const UserInfo: FC = () => (

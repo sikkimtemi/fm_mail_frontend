@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import PublicLayout from './components/layouts/PublicLayout';
+import PublicLayout from './layouts/PublicLayout';
 import Overview from './components/Overview';
 import Feature from './components/Feature';
 import Price from './components/Price';

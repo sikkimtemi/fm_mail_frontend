@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Notice from '../components/Notice';
 import Spacer from '../components/Spacer';
-import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '../layouts/AuthenticatedLayout';
 
 // 擬似的な通知ページ（動的な通知機能は必要になったら実装する）
 const MyPage: FC = () => {

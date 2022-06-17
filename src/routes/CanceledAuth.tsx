@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import CanceledContent from '../components/CanceledContent';
 import Spacer from '../components/Spacer';
-import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '../layouts/AuthenticatedLayout';
 import type { ThanksProps } from '../components/ThanksContent';
 
 // 認証後のキャンセル画面

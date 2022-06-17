@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useAtom } from 'jotai';
 import Notice from '../components/Notice';
 import Spacer from '../components/Spacer';
-import AuthenticatedLayout from '../components/layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '../layouts/AuthenticatedLayout';
 import stateUserAttribute from '../atom/UserAttribute';
 
 // マイページ

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import CanceledContent from '../components/CanceledContent';
 import Spacer from '../components/Spacer';
-import PublicLayout from '../components/layouts/PublicLayout';
+import PublicLayout from '../layouts/PublicLayout';
 import type { ThanksProps } from '../components/ThanksContent';
 
 // 公開ページのキャンセル画面
