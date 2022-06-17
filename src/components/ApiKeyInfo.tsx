@@ -1,15 +1,16 @@
 import { useState, FC } from 'react';
 
-type ApiKeyInfo = {
+export type ApiKeyItem = {
   Type: string;
   ApiKey: string;
 };
+
 type Props = {
   index: number;
-  item: ApiKeyInfo;
+  item: ApiKeyItem;
 };
 
-const ApiKeyList: FC<Props> = ({ index, item }) => {
+const ApiKeyInfo: FC<Props> = ({ index, item }) => {
   // コピー済みツールチップの表示制御用
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
@@ -64,4 +65,4 @@ const ApiKeyList: FC<Props> = ({ index, item }) => {
     </tr>
   );
 };
-export default ApiKeyList;
+export default ApiKeyInfo;
